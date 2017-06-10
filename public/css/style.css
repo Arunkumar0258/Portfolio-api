@@ -1,0 +1,20 @@
+nav {
+  background-color: E8E2D4;
+  font-size: 20px;
+}
+.inputs {
+  width: 1000px;
+  height: 30px;
+  margin: 8px;
+}
+form {
+  padding: 60px;
+  height: 30px;
+}
+label {
+  padding-top: 15px;
+  margin-left: 100px;
+}
+.btn {
+  margin-left: 120px;
+}
