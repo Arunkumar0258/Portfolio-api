@@ -3,7 +3,7 @@ const User = require('../models/schema/signin');
 module.exports.getUsers = function(req,res,next) {
         User.find({}, function(err, users) {
                 if(err) return next(err);
-                return res.send(users);
+                return res.json(users);
         })
 }
 
@@ -30,19 +30,17 @@ module.exports.createUser = function(req,res,next) {
                 userData.phone = phone;
         }
 
-        if(req.body.password) {
+        if(req.body.password)
                 userData.hash = req.body.password;
-                //userData.password = req.body.password;
-        }
 
         if(req.body.hash)
                 userData.hash = req.body.hash;
 
         var newUser = new User(userData);
 
-        User.create(userData,function (err,user) {
+        User.create(userData, function (err,user) {
                 if(err) return next(err);
-                return res.sendStatus(200);
+                return res.json(user);
         })
 };
 
@@ -61,5 +59,3 @@ module.exports.deleteUserById = function(req,res,next) {
                 return res.sendStatus(200);
         });
 };
-
-

@@ -1,4 +1,5 @@
 var form = document.getElementById('myForm');
+var form1 = document.getElementById('myForm1')
 
 function submitForm() {
 
@@ -13,41 +14,40 @@ function submitForm() {
         fetch('/signup', {
                 headers: {
                     'Accept': 'application/json',
-                    'Content/Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 },
                 method: 'POST',
                 body: JSON.stringify(data)
         }).then(function(res) {
-            if(!res.ok) alert('there was an error :((((');
-            else res.json();
-        }.catch(function(err) {
+            if(!res.ok) console.log('working fine');
+            else window.location = 'http://localhost:3001/';
+        }).catch(function(err) {
                 alert('unexpected error');
-        }))
+        })
 }
 
 function submitLogin() {
         var data = {
-                email: form.email.value,
-                password: form.password.value
+                email: form1.email.value,
+                password: form1.password.value
         }
 
         fetch('/login', {
                 headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/json'
                 },
                 method: 'POST',
                 body: JSON.stringify(data)
-        }.then(function(result) {
-                if (!result.ok) alert('there was an error');
-                return result.json().then(function(res) {
-                        localStorage.token = res.token;
-                        window.location = '/jet?token=' + res.token;
-                alert('hello');
-                }.catch(function(err) {
+        }).then(function(json_res) {
+                if (!json_res.ok) console.log('Something is wrong with server or fetch');
+                else {
+                    return json_res.json().then(function(ans) {
+                        localStorage.token = ans.token;
+                        window.location = 'http://localhost:3001/jet?token=' + ans.token;
+                    })
+                }
+        }).catch(function(err) {
                 console.log(err)
-            }))
-    }))
+            })
 }
-
-
