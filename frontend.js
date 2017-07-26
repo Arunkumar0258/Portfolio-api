@@ -8,7 +8,6 @@ const stylus = require('stylus');
 const nib = require('nib')
 
 var app = express();
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 
 function compile(str, path) {
     return stylus(str)
@@ -22,11 +21,12 @@ app.use(stylus.middleware({
     compile: compile
 }))
 
+app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
 app.set('views', path.join(__dirname, 'views','html'));
 app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/', routes);

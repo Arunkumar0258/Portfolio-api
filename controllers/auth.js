@@ -26,7 +26,7 @@ module.exports.loginUser = function(req,res,next) {
                 };
 
                         var token = jwt.sign(payload, config.secret, {
-                                expiresIn: 5,
+                                expiresIn: 5000,
                         });
                 user.token = token;
 

@@ -10,7 +10,7 @@ const auth = require('./controllers/auth');
 mongoose.Promise = global.Promise;
 mongoose.connect('localhost:27017');
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 var router = express.Router();

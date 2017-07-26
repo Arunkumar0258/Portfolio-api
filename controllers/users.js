@@ -26,7 +26,7 @@ module.exports.createUser = function(req,res,next) {
                                 phone += req.body.phone[i];
                 }
                 if(phone.length !== 10)
-                        return res.status(400).send('Invalid Phone');
+                        return console.log('Invalid phone')
                 userData.phone = phone;
         }
 

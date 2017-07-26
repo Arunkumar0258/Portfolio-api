@@ -3,6 +3,8 @@ var form1 = document.getElementById('myForm1')
 
 function submitForm() {
 
+
+
         var data = {
                 firstName: form.firstName.value,
                 lastName: form.lastName.value,
@@ -19,7 +21,7 @@ function submitForm() {
                 method: 'POST',
                 body: JSON.stringify(data)
         }).then(function(res) {
-            if(!res.ok) console.log('working fine');
+            if(!res.ok) console.log('Something wrong with frontend fetch.');
             else window.location = 'http://localhost:3001/';
         }).catch(function(err) {
                 alert('unexpected error');
@@ -50,4 +52,35 @@ function submitLogin() {
         }).catch(function(err) {
                 console.log(err)
             })
+}
+
+// function logOut() {
+//     if (localStorage.token)
+//         localStorage.removeItem("token");
+// }
+
+function validatePhone() {
+    var phone = form.phone.value;
+
+    var phoneregex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+    if(phone.match(phoneregex))
+        return true;
+}
+
+function validateEmail() {
+    var email = form.email.value;
+
+    var emailregex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if(email.match(emailregex))
+        return true;
+}
+
+function error(target) {
+    target.style.border = '2px solid red';
+}
+
+function clearError(target) {
+    target.style.border = '';
 }
